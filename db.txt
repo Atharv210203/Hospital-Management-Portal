@@ -1,0 +1,21 @@
+#user
+##id,name,email,password(common att)
+##role(oatient,admin,doctor)
+
+#doctorprofile
+## dept_id,name,password,email,is_active,phone
+
+#patientproflie
+## id,name,password,email,is_active,gender, phone no.,adress,
+
+#dep
+##id ,name , desc
+
+#appointment
+## app_id,doc_id,pat_id,date,time,status
+
+#treatment
+##id,app_id,prescription, diagnosis
+
+#doctor availability
+##doc id,av_date,time,start_time,end_time
