@@ -46,10 +46,10 @@ class PatientProfile(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id", ondelete = "CASCADE"), nullable=False, unique=True)
-    date_of_birth = db.Column(db.Date, nullable=False)
-    gender = db.Column(db.String(10), nullable=False)
-    phone = db.Column(db.String(15), nullable=False)
-    address = db.Column(db.String(200), nullable=False)
+    date_of_birth = db.Column(db.Date)
+    gender = db.Column(db.String(10))
+    phone = db.Column(db.String(15))
+    address = db.Column(db.String(200))
 
 
     user = db.relationship("User", back_populates="patient_profile")
