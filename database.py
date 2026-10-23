@@ -31,7 +31,7 @@ class DoctorProfile(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id", ondelete = "CASCADE"), nullable=False, unique=True)
-    department_id = db.Column(db.Integer, db.ForeignKey("departments.id"), nullable=False)
+    department_id = db.Column(db.Integer, db.ForeignKey("departments.id"))
     specialization = db.Column(db.String(100), nullable=False)
 
 
@@ -103,19 +103,27 @@ class DoctorAvailability(db.Model):
 
 
 
+
 def create_database(app):
     db.init_app(app)
+
     with app.app_context():
         db.create_all()
-        admin = User.query.filter_by(role="admin").first()
-        if not admin:
+
+        admin = User.query.filter_by(
+            email="admin@email.com"
+        ).first()
+
+        if admin is None:
             admin = User(
                 name="Admin",
                 email="admin@email.com",
                 password_hash=generate_password_hash("admin123"),
-                role = 'admin'
-                )
-
-        db.session.add(admin)
-        db.session.commit()
-     
+                role="admin",
+                is_active=True
+            )
+            db.session.add(admin)
+            db.session.commit()
+            print("Default admin account created.")
+        else:
+            print("Admin account already exists.")
